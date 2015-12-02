@@ -1,0 +1,5 @@
+Inputs: runTotal, N (number of cells), L (FPT distance), v (drift)
+10
+10
+10.0
+0.25
