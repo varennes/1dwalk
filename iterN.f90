@@ -66,24 +66,10 @@ do nRun = 1, runTotal
     do i = 1, iterN
         x(i) = real(i-1)
     enddo
-    ! write(*,*) x(:)
     ! inital center of mass (COM) position
     xCOMi = 0.0_8
     xCOMi = sum(x) / real(iterN)
     xCOM  = xCOMi
-    ! write(*,*) xCOMi
-
-    ! do i = N, 2, -1
-    !     call random_number(r)
-    !     k = 1 + floor( real(i) * r )
-    !     iTemp = iterateOrder(i)
-    !     iterateOrder(i) = iterateOrder(k)
-    !     iterateOrder(k) = iTemp
-    ! enddo
-    !
-    ! do i = 1, N
-    !     write(*,*) iterateOrder(i)
-    ! enddo
 
     do while( (xCOM - xCOMi) < L )
 
@@ -118,13 +104,15 @@ do nRun = 1, runTotal
             endif
         enddo
         xCOM = sum(x) / real(iterN)
-        ! write(*,*) x(:)
+
         t = t + 1
     enddo
 
     tRun(nRun) = t
 enddo
 
+! output data
+! make filenames for output data
 if( iterN < 10 )then
     format_string = "(A5,I1,A4)"
     write(filename,format_string) "tRun0", iterN, '.dat'
@@ -133,14 +121,11 @@ else
     write(filename,format_string) "tRun", iterN, '.dat'
 endif
 
-! filename = filename//'.dat'
-write(*,*) ' N =', iterN, filename
 open(unit=21,file=filename,status='replace',action='write')
 
 do i = 1, runTotal
     write(21,*) tRun(i)
 enddo
-! write(*,*) ' N =', iterN, ' FPT =', real(sum(tRun)) / real(runTotal)
 
 deallocate( x )
 deallocate( iterateOrder )
@@ -152,14 +137,6 @@ enddo
 
 call cpu_time(tf)
 
-! open(unit=21,file='tRun.dat',status='replace',action='write')
-!
-! do i = 1, runTotal
-!     write(21,*) tRun(i)
-! enddo
-
-! write(*,*) ' tRun =',tRun
-! write(*,*) ' FPT =', real(sum(tRun)) / real(runTotal)
 write(*,*) ' run time =',tf-t0
 end program
 
