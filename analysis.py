@@ -1,19 +1,21 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-f = open( 'input.txt', 'r')
+def format(value):
+    return "%.3f" % value
 
+f = open( 'input.txt', 'r')
 content = [x.strip('\n') for x in f.readlines()]
 content.pop(0)
 content = [ float(x) for x in content]
+f.close()
 
 runTotal = int(content[0])
 N = int(content[1])
 L = content[2]
 v = content[3]
 
-print content
-
+print ' '
 print runTotal
 print N
 print L
@@ -34,10 +36,27 @@ for i in range(N):
     tMean.append(np.mean(tRun))
     tSdev.append(np.std(tRun))
 
-n = [ i+1 for i in range(N)]
-plt.errorbar( n, tMean, yerr=tSdev)
-plt.xlim([min(n)-1, max(n)+1])
-plt.xticks(n)
-plt.xlabel('N')
-plt.ylabel('FPT')
-plt.show()
+f.close()
+
+vStr = '%.0f' % (v*100)
+filename = 'fpt_v0_' + vStr + '.dat'
+fo = open(filename, 'w')
+for i in range(N):
+    s = str(i+1) + ' ' + str(tMean[i]) + ' ' + str(tSdev[i]) + '\n'
+    fo.write(s)
+
+# fo.write(str(formatted))
+fo.close()
+
+# n = [ i+1 for i in range(N)]
+# plt.errorbar( n, tMean, yerr=tSdev)
+# plt.xlim([min(n)-1, max(n)+1])
+# # plt.xticks(n)
+# plt.xlabel('N')
+# plt.ylabel('FPT')
+# plt.show()
+#
+# plt.errorbar( n, tMean, yerr=tSdev)
+# plt.xscale('log')
+# plt.yscale('log')
+# plt.show()
