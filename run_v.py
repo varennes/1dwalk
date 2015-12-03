@@ -2,8 +2,8 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-vi = 0.10;
-vf = 0.30;
+vi = 0.05;
+vf = 0.40;
 dv = 0.05;
 nv =  int(round( (vf-vi)/dv )) + 1
 v = [ (vi + float(x)*dv) for x in range(nv) ];

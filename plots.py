@@ -25,5 +25,12 @@ for vRun in v:
     vStr = '%.3f' %vRun
     plt.errorbar( n, mean, yerr=std, label=vStr)
 
-plt.legend()
+plt.xscale('log')
+plt.yscale('log')
+
+plt.legend(loc=2)
+plt.xlabel('N')
+plt.ylabel('FPT')
+plt.title('Mean FPT for different Drift Velocity')
+# plt.savefig('mfpt_n90_2.png')
 plt.show()
