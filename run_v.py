@@ -2,7 +2,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-vi = 0.05;
+vi = 0.20;
 vf = 0.40;
 dv = 0.05;
 nv =  int(round( (vf-vi)/dv )) + 1

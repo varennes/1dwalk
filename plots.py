@@ -1,11 +1,15 @@
 # import os
-# import numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 
 fvList = open( 'vList.txt' , 'r')
 v = [];
 for line in fvList:
     v.append(float(line))
+
+tFit = []
+tMean = []
+vSlope = []
 
 # make plots from simulation data
 for vRun in v:
@@ -23,14 +27,38 @@ for vRun in v:
         std.append(float(row[2]))
 
     vStr = '%.3f' %vRun
+
+    tMean.append(mean)
+
+    # get log-log fit (base 10)
+    k = n.index(50)
+    fz = np.polyfit( np.log10(n[k:len(n)]), np.log10(mean[k:len(n)]), 1)
+    z  = np.polyval( fz, np.log10(n[k:len(n)]))
+    tFit.append(z)
+    vSlope.append('%.3f' %fz[0])
+
     plt.errorbar( n, mean, yerr=std, label=vStr)
 
-plt.xscale('log')
-plt.yscale('log')
+# plt.xscale('log')
+# plt.yscale('log')
 
 plt.legend(loc=2)
 plt.xlabel('N')
 plt.ylabel('FPT')
 plt.title('Mean FPT for different Drift Velocity')
-# plt.savefig('mfpt_n90_2.png')
+plt.savefig('fig/mfpt_n300_1.png')
+plt.show()
+
+cList = ['r', 'g', 'b', 'm', 'k']
+i = 0
+for vRun in v:
+    plt.plot(np.log10(n),np.log10(tMean[i]), 'o', color=cList[i]) #, label=['%.2f' %vRun])
+    plt.plot(np.log10(n[k:len(n)]),tFit[i], color=cList[i], label=vSlope[i])
+    i += 1
+
+plt.legend(loc=4)
+plt.title('FPT for different Drift Velocity, Log-log Fits')
+plt.xlabel('$\log_{10}(N)$')
+plt.ylabel('$\log_{10}(FPT)$')
+plt.savefig('fig/mfpt_n300_2.png')
 plt.show()

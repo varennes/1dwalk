@@ -24,10 +24,13 @@ print v
 tMean = [];
 tSdev = [];
 
-for i in range(N):
-    filename = 'tRun0' + str(i+1) + '.dat'
+for i in range(9,N,10):
+    filename = 'tRun00' + str(i+1) + '.dat'
 
     if (i+1) >= 10:
+        filename = 'tRun0' + str(i+1) + '.dat'
+
+    if (i+1) >= 100:
         filename = 'tRun' + str(i+1) + '.dat'
 
     f = open(filename,'r')
@@ -41,9 +44,11 @@ f.close()
 vStr = '%.0f' % (v*100)
 filename = 'fpt_v0_' + vStr + '.dat'
 fo = open(filename, 'w')
-for i in range(N):
-    s = str(i+1) + ' ' + str(tMean[i]) + ' ' + str(tSdev[i]) + '\n'
+j = 0
+for i in range(9,N,10):
+    s = str(i+1) + ' ' + str(tMean[j]) + ' ' + str(tSdev[j]) + '\n'
     fo.write(s)
+    j += 1
 
 # fo.write(str(formatted))
 fo.close()

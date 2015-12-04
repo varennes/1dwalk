@@ -45,7 +45,7 @@ write(*,*)
 
 call init_random_seed()
 
-do iterN = 1, N
+do iterN = 10, N, 10
 
     allocate( x(iterN) )
     allocate( iterateOrder(iterN) )
@@ -113,11 +113,14 @@ enddo
 
 ! output data
 ! make filenames for output data
-if( iterN < 10 )then
-    format_string = "(A5,I1,A4)"
+format_string = "(A6,I1,A4)"
+write(filename,format_string) "tRun00", iterN, '.dat'
+if( iterN >= 10 )then
+    format_string = "(A5,I2,A4)"
     write(filename,format_string) "tRun0", iterN, '.dat'
-else
-    format_string = "(A4,I2,A4)"
+endif
+if( iterN >= 100)then
+    format_string = "(A4,I3,A4)"
     write(filename,format_string) "tRun", iterN, '.dat'
 endif
 
