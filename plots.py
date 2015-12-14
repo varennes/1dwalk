@@ -49,7 +49,7 @@ for vRun in v:
     # tFit.append(z)
     # vSlope.append('%.3f' %fz[0])
 
-    plt.errorbar( n, mean, yerr=std, label=vStr, color=cList[i])
+    plt.errorbar( n, mean, yerr=std, label=vStr) #, color=cList[i])
 
 # plt.xscale('log')
 # plt.yscale('log')
@@ -59,7 +59,7 @@ plt.xlabel(r'$N/L$')
 plt.ylabel(r'$<\tau>v/L$')
 plt.title('Mean FPT for different Drift Velocity')
 # plt.title(r'$\alpha_i > \beta_i$', fontsize=20)
-plt.savefig('fig/mfpt_n300_4.png')
+plt.savefig('fig/mfpt_n100_1.png')
 plt.show()
 
 # plt.subplot(2,1,2)

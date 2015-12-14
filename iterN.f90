@@ -28,10 +28,6 @@ read(11,*) N
 read(11,*) L
 read(11,*) v
 
-! N = 4
-! L = 10_8
-! v = 0.25_8
-
 pLeft  = 0.5_8 - v
 pRight = 0.5_8 + v
 
@@ -52,6 +48,7 @@ do iterN = 10, N, 10
     allocate( tRun(runTotal) )
 
     ! initialize arrays
+    x(:) = 0.0_8
     tRun(:) = 0
 
     do i = 1, iterN
