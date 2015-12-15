@@ -4,7 +4,7 @@
 
 There are `N` particles that can move in one dimension. During one time step a particle can move one particle width to the left with probability `pLeft`, or to the right with probability `pRight`.
 
-- The probabilities sum to 1 and the difference between `pRight` and `pLeft` is the drift velocity.
+- The probabilities sum to 1 and the difference between `pRight` and `pLeft` is referred to as the drift velocity.
 - Particles move in discrete units of distance equal to one particle width.
 - Particles may not occupy the same position at the same time.
 - Particles are initialized one particle-width apart from one another.

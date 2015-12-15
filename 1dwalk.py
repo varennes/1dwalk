@@ -12,7 +12,7 @@ runTotal = int(content[1])
 N = float(content[2])
 L = float(content[3])
 
-vi = 0.10;
+vi = 0.40;
 vf = 0.45;
 dv = 0.05;
 nv =  int(round( (vf-vi)/dv )) + 1
@@ -26,7 +26,7 @@ for vRun in v:
     pRight = 0.5 + vRun;
     pLeft  = 0.5 - vRun;
 
-    for i in range(10,int(N)+1,10):
+    for i in range(1,int(N)+1,2):
 
         nList.append(i)
         x = []
@@ -80,10 +80,12 @@ for vRun in v:
     plt.errorbar( nList, FPTmean, yerr=FPTstdv, label=vStr)
 
 plt.legend(loc=2)
-plt.ylim([1.0, 2.2])
+# plt.ylim([1.0, 2.2])
 # plt.xlim([min(nList)-0.01, max(nList)+0.01])
+# plt.xscale('log')
+# plt.yscale('log')
 plt.xlabel(r'$N/L$')
 plt.ylabel(r'$<\tau>v/L$')
 plt.title('Mean FPT for different Drift Velocity (python version)')
-plt.savefig('fig/mfptPY_n100_1.png')
+# plt.savefig('fig/mfptPY_n300_1.png')
 plt.show()
